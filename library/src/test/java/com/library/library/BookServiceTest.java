@@ -4,6 +4,7 @@ package com.library.library;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import com.library.library.DTO.BookDto;
+import com.library.library.DTO.CategoryDto;
 import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
 import com.library.library.Entity.Book;
 import com.library.library.Entity.Category;
@@ -21,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -165,7 +167,8 @@ public class BookServiceTest {
     public void testGetBookById(){
       Book book = new Book(100L,"book test");
         when(bookRepository.findById(100L)).thenReturn(Optional.of(book));
-      BookDto bookDto = BookDto.bookDtofromEntity(book);
+
+      BookDto bookDto = BookDto.ModelMapperBook(book);
       BookDto bookReturned = bookService.getBookById(100L);
 
       assertEquals(bookDto.getBookName(),bookReturned.getBookName());
@@ -190,7 +193,7 @@ public class BookServiceTest {
 
       List<BookDto> bookDTOList = bookList.stream()
               .map(book -> {
-                  BookDto bookDto = BookDto.bookDtofromEntity(book);
+                  BookDto bookDto = BookDto.ModelMapperBook(book);
                   return bookDto;
               })
               .toList();
@@ -203,7 +206,8 @@ public class BookServiceTest {
 
   }
 
-  @Test
+
+    @Test
     public void testUpdateBook(){
 
       String message = "Book with id 100 updated successfully";

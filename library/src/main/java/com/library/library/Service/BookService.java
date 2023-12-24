@@ -1,6 +1,7 @@
 package com.library.library.Service;
 
 import com.library.library.DTO.BookDto;
+import com.library.library.DTO.CategoryDto;
 import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
 import com.library.library.Entity.Book;
 import com.library.library.Entity.Category;
@@ -8,6 +9,7 @@ import com.library.library.Excepion.CustomException;
 import com.library.library.Repository.JpaBookRepository;
 import com.library.library.Repository.JpaCategoryRepository;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -56,15 +58,15 @@ public class BookService {
     public BookDto getBookById(Long id) {
             Book book = bookRepository.findById(id).orElseThrow(()->
                     new ResourceNotFoundException("The Book with this id "+id+" is Not exists"));
-            BookDto bookDto = BookDto.bookDtofromEntity(book);
-            return bookDto;
+        BookDto bookDto = BookDto.ModelMapperBook(book);
+        return bookDto;
     }
 
     public List<BookDto> getAllBooks() {
         List<Book> books = bookRepository.findAll();
         List<BookDto> bookDTOList = books.stream()
                 .map(book -> {
-                    BookDto bookDto = BookDto.bookDtofromEntity(book);
+                   BookDto bookDto = BookDto.ModelMapperBook(book);
                     return bookDto;
                 })
                 .toList();

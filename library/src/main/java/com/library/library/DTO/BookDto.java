@@ -1,14 +1,14 @@
 package com.library.library.DTO;
 
 import com.library.library.Entity.Book;
-import com.library.library.Entity.Category;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
-import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -20,17 +20,15 @@ public class BookDto {
     String bookName;
     CategoryDto categoryDto;
 
-    public static BookDto bookDtofromEntity(Book book) {
-        BookDto bookDto = new BookDto();
-        bookDto.setId(book.getId());
-        bookDto.setBookName(book.getBookName());
-
-        if (book.getCategory() != null) {
-            CategoryDto categoryDTO = new CategoryDto();
-            categoryDTO.setId(book.getCategory().getId());
-            categoryDTO.setCategoryName(book.getCategory().getCategoryName());
-            bookDto.setCategoryDto(categoryDTO);
+    public static BookDto ModelMapperBook(Book book){
+        ModelMapper modelMapperBook = new ModelMapper();
+        BookDto bookDto = modelMapperBook.map(book, BookDto.class);
+        if(book.getCategory()!=null) {
+            ModelMapper modelMapper = new ModelMapper();
+            CategoryDto categoryDto= modelMapper.map(book.getCategory(), CategoryDto.class);
+            bookDto.setCategoryDto(categoryDto);
         }
         return bookDto;
     }
+
 }
