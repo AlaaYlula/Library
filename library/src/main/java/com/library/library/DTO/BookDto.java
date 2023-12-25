@@ -3,6 +3,7 @@ package com.library.library.DTO;
 import com.library.library.Entity.Book;
 
 
+import com.library.library.Entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,15 +19,13 @@ public class BookDto {
 
     Long id;
     String bookName;
-    CategoryDto categoryDto;
+    Category category;
 
     public static BookDto ModelMapperBook(Book book){
         ModelMapper modelMapperBook = new ModelMapper();
         BookDto bookDto = modelMapperBook.map(book, BookDto.class);
         if(book.getCategory()!=null) {
-            ModelMapper modelMapper = new ModelMapper();
-            CategoryDto categoryDto= modelMapper.map(book.getCategory(), CategoryDto.class);
-            bookDto.setCategoryDto(categoryDto);
+            bookDto.setCategory(book.getCategory());
         }
         return bookDto;
     }

@@ -4,7 +4,6 @@ package com.library.library;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import com.library.library.DTO.BookDto;
-import com.library.library.DTO.CategoryDto;
 import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
 import com.library.library.Entity.Book;
 import com.library.library.Entity.Category;
@@ -22,10 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 
-import org.modelmapper.ModelMapper;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -212,22 +208,40 @@ public class BookServiceTest {
 
       String message = "Book with id 100 updated successfully";
       Book book = new Book(100L,"test book1");
+      Category category = new Category(100L,"category 1");
 
       when(bookRepository.findById(100L)).thenReturn(Optional.of(book));
-      when(bookRepository.save(book)).thenReturn(book);
+        when(categoryRepository.findById(100L)).thenReturn(Optional.of(category));
 
-      String updateMessaga = bookService.updateBook(100L,book);
+        when(bookRepository.save(book)).thenReturn(book);
+
+      String updateMessaga = bookService.updateBook(100L,100L,book);
       assertEquals(message,updateMessaga);
   }
 
   @Test
-    public void testCanNotUpdate(){
+    public void testCanNotUpdateBookNotFound(){
       Book book = new Book(100L,"test book1");
+      Category category = new Category(100L,"category 1");
 
       String message = "Can't find Book with id 100 to update";
       when(bookRepository.findById(100L)).thenReturn(Optional.empty());
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class ,
-                ()-> bookService.updateBook(100L,book));
+                ()-> bookService.updateBook(100L,100L,book));
         assertEquals(message,exception.getMessage());
   }
+
+    @Test
+    public void testCanNotUpdateBookCategoryNotFound(){
+        Book book = new Book(100L,"test book1");
+        Category category = new Category(100L,"category 1");
+        String message = "You can't update the category for book: "+book.getBookName()+", the category with id "+category.getId()+" Not Found";
+
+        when(bookRepository.findById(100L)).thenReturn(Optional.of(book));
+        when(categoryRepository.findById(100L)).thenReturn(Optional.empty());
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class ,
+                ()-> bookService.updateBook(100L,100L,book));
+        assertEquals(message,exception.getMessage());
+    }
 }

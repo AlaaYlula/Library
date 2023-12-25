@@ -1,17 +1,12 @@
 package com.library.library.Service;
 
-import com.library.library.AppResponse.Response;
-import com.library.library.DTO.CategoryDto;
 import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
 import com.library.library.Entity.Category;
 
 import com.library.library.Excepion.CustomException;
 import com.library.library.Repository.JpaCategoryRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

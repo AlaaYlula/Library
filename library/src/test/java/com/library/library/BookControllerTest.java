@@ -3,8 +3,8 @@ package com.library.library;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.library.library.Controller.BookController;
 import com.library.library.DTO.BookDto;
-import com.library.library.DTO.CategoryDto;
 import com.library.library.Entity.Book;
+import com.library.library.Entity.Category;
 import com.library.library.Service.BookService;
 
 import org.junit.Assert;
@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -68,7 +67,7 @@ public class BookControllerTest {
 
         String bookName = "book 2";
         Long id = 3L;
-        CategoryDto category = new CategoryDto(1L,"cate 1 ");
+        Category category = new Category(1L,"cate 1 ");
         BookDto bookDto = new BookDto();
         Mockito.when(bookService.getBookById(id)).thenReturn(bookDto);
         Assert.assertNotNull(bookController.getBookById(id));
@@ -112,9 +111,8 @@ public class BookControllerTest {
         String bookName = "book 2";
         Book book = new Book(1L,"book upadte");
 
-
-        Mockito.when(bookService.updateBook(1L,book)).thenReturn("Book with id 1 updated successfully");
-        Assert.assertNotNull(bookController.updateBook(1L,book));
+        Mockito.when(bookService.updateBook(2L,1L,book)).thenReturn("Book with id 1 updated successfully");
+        Assert.assertNotNull(bookController.updateBook(2L,1L,book));
         Assert.assertNotNull(bookName);
         Assert.assertNotNull(book);
     }

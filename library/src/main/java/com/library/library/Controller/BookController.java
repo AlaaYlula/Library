@@ -46,8 +46,8 @@ public class BookController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updateBook(@PathVariable Long id, @RequestBody Book book) throws JsonProcessingException {
-        String message =  bookService.updateBook(id,book);
+    public ResponseEntity<Object> updateBook(@RequestParam Long categoryId , @PathVariable Long id, @RequestBody Book book) throws JsonProcessingException {
+        String message =  bookService.updateBook(categoryId,id,book);
         String jsonString = Response.convertToJsonString(message,HttpStatus.CREATED);
         return new ResponseEntity<>(jsonString,HttpStatus.CREATED);
      //   return new ResponseEntity<>(new Response(message,HttpStatus.CREATED), HttpStatus.CREATED);

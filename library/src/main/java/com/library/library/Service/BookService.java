@@ -1,7 +1,6 @@
 package com.library.library.Service;
 
 import com.library.library.DTO.BookDto;
-import com.library.library.DTO.CategoryDto;
 import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
 import com.library.library.Entity.Book;
 import com.library.library.Entity.Category;
@@ -9,7 +8,6 @@ import com.library.library.Excepion.CustomException;
 import com.library.library.Repository.JpaBookRepository;
 import com.library.library.Repository.JpaCategoryRepository;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -75,14 +73,15 @@ public class BookService {
 
 
     // This will update only the book name
-    public String updateBook(Long id, Book book) {
+    public String updateBook(Long categoryId, Long id, Book book) {
         try {
             Book bookFind = bookRepository.findById(id).orElseThrow(() ->
                     new ResourceNotFoundException("Can't find Book with id " + id + " to update"));
+
+            Category category = categoryRepository.findById(categoryId).orElseThrow(()->
+                    new ResourceNotFoundException("You can't update the category for book: "+bookFind.getBookName()+", the category with id "+categoryId+" Not Found"));
             bookFind.setBookName(book.getBookName());
-            // If I want to update the category for the book then,
-            // I need to send the is for the new category to find it and set it
-            //bookFind.setCategory(book.getCategory());
+            bookFind.setCategory(category);
             bookRepository.save(bookFind);
             return "Book with id " + id + " updated successfully";
         }catch (ResourceNotFoundException ex){

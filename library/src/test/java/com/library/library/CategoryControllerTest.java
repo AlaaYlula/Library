@@ -1,13 +1,8 @@
 package com.library.library;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.library.library.Controller.BookController;
 import com.library.library.Controller.CategoryController;
-import com.library.library.DTO.BookDto;
-import com.library.library.DTO.CategoryDto;
-import com.library.library.Entity.Book;
 import com.library.library.Entity.Category;
-import com.library.library.Service.BookService;
 import com.library.library.Service.CategoryService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,8 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
