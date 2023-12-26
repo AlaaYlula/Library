@@ -93,9 +93,9 @@ public class CustomExceptionHandler { //Extends So I can handle any other Except
             NoResourceFoundException ex) {
         List<String> details = new ArrayList<String>();
         details.add(String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getResourcePath()));
-        CustomRestException customException = new CustomRestException("Method Not Found", HttpStatus.BAD_REQUEST,details);
+        CustomRestException customException = new CustomRestException("Method Not Found", HttpStatus.NOT_FOUND,details);
         indexDocument(ex.getMessage(),Level.WARN);
-        return new ResponseEntity<>(customException , HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(customException , HttpStatus.NOT_FOUND);
 
     }
 
