@@ -10,6 +10,7 @@ import com.library.library.Repository.JpaCategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 import java.util.List;
 
@@ -37,10 +38,9 @@ public class BookService {
             book.setCategory(category);
             bookRepository.save(book);
             return "The Book added successfully";
-        }catch (ResourceNotFoundException ex) {
+        }catch (ResourceNotFoundException  ex) {
             throw new ResourceNotFoundException(ex.getMessage());
-        }
-        catch (CustomException e){
+        }catch (CustomException e ){
             throw  new CustomException(e.getMessage());
         }
     }

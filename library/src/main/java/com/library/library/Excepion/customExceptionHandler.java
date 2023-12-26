@@ -4,9 +4,11 @@ import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
 import com.library.library.Entity.levelEnum.Level;
 import com.library.library.Entity.Logs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -31,6 +33,24 @@ public class customExceptionHandler{ //Extends So I can handle any other Excepti
         CustomRestException customException = new CustomRestException(ex.getMessage(), HttpStatus.NOT_FOUND);
         indexDocument(ex.getMessage(),Level.ERROR);
         return new ResponseEntity<>(customException , HttpStatus.NOT_FOUND);
+
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    protected ResponseEntity<Object> handleEntityFieldNULL(
+            DataIntegrityViolationException ex) {
+        CustomRestException customException = new CustomRestException(ex.getMessage(), HttpStatus.CONFLICT);
+        indexDocument(ex.getMessage(),Level.ERROR);
+        return new ResponseEntity<>(customException , HttpStatus.CONFLICT);
+
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    protected ResponseEntity<Object> handleParamNotFound(
+            MissingServletRequestParameterException ex) {
+        CustomRestException customException = new CustomRestException(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        indexDocument(ex.getMessage(),Level.ERROR);
+        return new ResponseEntity<>(customException , HttpStatus.BAD_REQUEST);
 
     }
 
