@@ -13,7 +13,6 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.ArrayList;
@@ -114,7 +113,7 @@ public class CustomExceptionHandler { //Extends So I can handle any other Except
         Date date = new Date();
         Logs log = new Logs(message, level, date);
         try {
-            System.out.println(elasticSearchQuery.createDocumentLog(log));
+            elasticSearchQuery.createDocumentLog(log);
         } catch (Exception e) {
             System.err.println("Error creating document log: " + e.getMessage());
         }

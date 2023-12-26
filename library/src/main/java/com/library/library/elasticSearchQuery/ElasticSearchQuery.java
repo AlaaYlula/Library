@@ -15,7 +15,6 @@ public class ElasticSearchQuery {
 
     @Autowired
     private ElasticsearchClient elasticsearchClient;
-    //@Value("{indexName}")
     String indexName = "logsearch";
 
     public String createDocumentLog(Logs log){
@@ -25,7 +24,6 @@ public class ElasticSearchQuery {
                     .id(log.getId())
                     .document(log)
             );
-            System.out.println("Index Response: " + response);
             return "Create Document Log";
 
         }catch (Exception e){
@@ -51,8 +49,6 @@ public class ElasticSearchQuery {
 
             if(!searchResponse.hits().hits().isEmpty()) {
                 logs = searchResponse.hits().hits().stream().map(Hit::source).toList();
-            }else{
-                System.out.println("the response Empty Logs List");
             }
         }catch (Exception e){
             throw new NoSuchFieldException();

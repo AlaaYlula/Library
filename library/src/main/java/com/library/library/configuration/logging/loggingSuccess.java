@@ -32,13 +32,10 @@ public class loggingSuccess {
 
                     // Access the "message" property
                     message = responseReceived.getMessage();
-                    System.out.println("The Message "+message);
                     // Log the document
                     Date date = new Date();
                     Logs log = new Logs(message, Level.INFO, date);
-                    System.out.println(elasticSearchQuery.createDocumentLog(log));
-            }else{
-                System.out.println("It is Getting");
+                    elasticSearchQuery.createDocumentLog(log);
             }
 
         }
