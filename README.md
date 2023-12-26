@@ -33,7 +33,7 @@ spring.data.elasticsearch.repositories.enabled=true
 |:-----------------------------|:-----------------------------------------------------:|:-----------------------------------:|
 | GET /category/               |                   List of category                    |                                     |
 | GET /category/{id}           |                       category                        |                                     |
-| POST /category/add           | json String with message and status <br/>and will Log |    {"categoryName":"category1"}     |
+| POST /category/              | json String with message and status <br/>and will Log |    {"categoryName":"category1"}     |
 | PUT /category/{id}           | json String with message and status <br/>and will Log | {"categoryName":"category1 update"} |
 | DELETE /category/{id}        |             No_CONTENT <br/>and will Log              |                                                  |
 
