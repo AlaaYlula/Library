@@ -65,7 +65,7 @@ public class CategoryServiceTest {
         CustomException customException = assertThrows(CustomException.class,
                 () -> categoryService.addCategory(category));
 
-        String message = "trying to add category which is already exists";
+        String message = "trying to add category category test 3 which is already exists";
         assertEquals(message,customException.getMessage());
     }
 

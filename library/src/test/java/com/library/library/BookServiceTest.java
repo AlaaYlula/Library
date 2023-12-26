@@ -87,7 +87,7 @@ public class BookServiceTest {
 
     @Test
     public void testAddBookAlreadyInTheCategory() throws Exception {
-        String message = "trying to add Book which already in this category";
+        String message = "trying to add Book book test which is already in the category test category";
         Book book = new Book(100L,"book test");
         Category category = new Category(10L,"category test");
         List<Book> bookList = new ArrayList<>();
@@ -202,7 +202,7 @@ public class BookServiceTest {
 
   @Test
   public void testNotGetBookById(){
-        String message = "The Book with this id 100 is Not exists";
+        String message = "The Book with id 100 is Not exists";
       when(bookRepository.findById(100L)).thenReturn(Optional.empty());
       ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class ,
               ()-> bookService.getBookById(100L));
