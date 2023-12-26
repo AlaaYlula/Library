@@ -1,11 +1,11 @@
 package com.library.library;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.library.library.Controller.BookController;
-import com.library.library.DTO.BookDto;
-import com.library.library.Entity.Book;
-import com.library.library.Entity.Category;
-import com.library.library.Service.BookService;
+import com.library.library.controller.BookController;
+import com.library.library.dto.BookDto;
+import com.library.library.entity.Book;
+import com.library.library.entity.Category;
+import com.library.library.service.BookService;
 
 import org.junit.Assert;
 import org.junit.Before;

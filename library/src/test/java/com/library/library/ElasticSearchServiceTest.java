@@ -1,16 +1,14 @@
 package com.library.library;
 
-import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
-import com.library.library.Entity.Logs;
-import com.library.library.Entity.levelEnum.Level;
-import com.library.library.Service.ElasticSearchService;
+import com.library.library.elasticSearchQuery.ElasticSearchQuery;
+import com.library.library.entity.Logs;
+import com.library.library.entity.levelEnum.Level;
+import com.library.library.service.ElasticSearchService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

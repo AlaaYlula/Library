@@ -1,9 +1,9 @@
 package com.library.library;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.library.library.Controller.CategoryController;
-import com.library.library.Entity.Category;
-import com.library.library.Service.CategoryService;
+import com.library.library.controller.CategoryController;
+import com.library.library.entity.Category;
+import com.library.library.service.CategoryService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

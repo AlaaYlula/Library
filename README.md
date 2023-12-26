@@ -31,21 +31,21 @@ spring.data.elasticsearch.repositories.enabled=true
 
 | Method                       |                        return                         |                body                 |
 |:-----------------------------|:-----------------------------------------------------:|:-----------------------------------:|
-| GET /category/all            |                   List of category                    |                                     |
-| GET /category/get/{id}       |                       category                        |                                     |
+| GET /category/               |                   List of category                    |                                     |
+| GET /category/{id}           |                       category                        |                                     |
 | POST /category/add           | json String with message and status <br/>and will Log |    {"categoryName":"category1"}     |
-| PUT /category/update/{id}    | json String with message and status <br/>and will Log | {"categoryName":"category1 update"} |
-| DELETE /category/delete/{id} |             No_CONTENT <br/>and will Log              |                                                  |
+| PUT /category/{id}           | json String with message and status <br/>and will Log | {"categoryName":"category1 update"} |
+| DELETE /category/{id}        |             No_CONTENT <br/>and will Log              |                                                  |
 
 ### Book Controller
 
 | Method                       |                        return                         |                       body                                |
 |:-----------------------------|:-----------------------------------------------------:|:---------------------------------------------------------:|
-| GET /book/all                |                     List of book                      |                                                           |
-| GET /book/get/{id}           |                         book                          |                                                           |
-| POST /book/add               | json String with message and status <br/>and will Log | param : categoryId  , Body: {"bookName":"book1"}          |
-| PUT /book/update/{id}        | json String with message and status <br/>and will Log | param : categoryId  , Body: {"bookName":"book1 update"}   |
-| DELETE /book/delete/{id}     |             No_CONTENT <br/>and will Log              |                                                           |
+| GET /book/                   |                     List of book                      |                                                           |
+| GET /book/{id}               |                         book                          |                                                           |
+| POST /book/                  | json String with message and status <br/>and will Log | param : categoryId  , Body: {"bookName":"book1"}          |
+| PUT /book/{id}               | json String with message and status <br/>and will Log | param : categoryId  , Body: {"bookName":"book1 update"}   |
+| DELETE /book/{id}            |             No_CONTENT <br/>and will Log              |                                                           |
 
 ### ElasticSearch Controller
 Level : warn,info and error

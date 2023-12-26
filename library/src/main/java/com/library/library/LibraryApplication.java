@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({"com.library.library", "com.library.library.Configuration.logging"})
+@ComponentScan({"com.library.library", "com.library.library.configuration.logging"})
 public class LibraryApplication {
 
 	@Bean

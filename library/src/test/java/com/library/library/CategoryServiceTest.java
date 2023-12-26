@@ -1,16 +1,15 @@
 package com.library.library;
 
-import com.library.library.Entity.Category;
-import com.library.library.Excepion.CustomException;
-import com.library.library.Repository.JpaCategoryRepository;
-import com.library.library.Service.CategoryService;
+import com.library.library.entity.Category;
+import com.library.library.excepion.CustomException;
+import com.library.library.repository.JpaCategoryRepository;
+import com.library.library.service.CategoryService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.ResourceNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;

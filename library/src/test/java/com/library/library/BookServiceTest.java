@@ -3,17 +3,18 @@ package com.library.library;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
-import com.library.library.DTO.BookDto;
-import com.library.library.ElasticSearchQuery.ElasticSearchQuery;
-import com.library.library.Entity.Book;
-import com.library.library.Entity.Category;
-import com.library.library.Entity.Logs;
-import com.library.library.Entity.levelEnum.Level;
-import com.library.library.Excepion.CustomException;
-import com.library.library.Repository.JpaBookRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.library.library.dto.BookDto;
+import com.library.library.elasticSearchQuery.ElasticSearchQuery;
+import com.library.library.entity.Book;
+import com.library.library.entity.Category;
+import com.library.library.entity.Logs;
+import com.library.library.entity.levelEnum.Level;
+import com.library.library.excepion.CustomException;
+import com.library.library.repository.JpaBookRepository;
 
-import com.library.library.Repository.JpaCategoryRepository;
-import com.library.library.Service.BookService;
+import com.library.library.repository.JpaCategoryRepository;
+import com.library.library.service.BookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,8 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @RunWith(SpringRunner.class)
 public class BookServiceTest {
@@ -60,11 +63,12 @@ public class BookServiceTest {
     @Mock
     private IndexResponse indexResponse;
 
+    ObjectMapper objectMapper;
     @Before
     public void setup(){
         RequestContextHolder.setRequestAttributes(requestAttributes);
         this.mockMvc = MockMvcBuilders.standaloneSetup(bookRepository).build();
-
+         objectMapper = new ObjectMapper();
     }
 
   @Test
@@ -110,6 +114,31 @@ public class BookServiceTest {
         assertEquals(message,exception.getMessage());
 
     }
+//    @Test
+//    public void testAddBookWithNoCategoryParam() throws DataIntegrityViolationException {
+////        MissingServletRequestParameterException exception = assertThrows(MissingServletRequestParameterException.class,
+////                () -> mockMvc.perform(MockMvcRequestBuilders.post("/book/add")
+////                                .content("{\"bookName\":\"book test\"}")
+////                                .contentType("application/json"))
+////                        .andExpect(status().isBadRequest())
+////                        .andReturn());
+////        String expectedMessage = "Required request parameter 'categoryId' for method parameter type Long is not present";
+////
+////        MissingServletRequestParameterException exception = assertThrows(MissingServletRequestParameterException.class,()->
+////                mockMvc.perform(post("/book/add")
+////                                .content("{\"bookName\":\"book test\"}")
+////                                .contentType(MediaType.APPLICATION_JSON))
+////                        .andExpect(status().isBadRequest())
+////                        .andExpect(content()
+////                                .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+////                      );
+//        // Check the error message or any other assertions you need
+//      //  String expectedMessage = "Required request parameter 'categoryId' for method parameter type Long is not present";
+//        String actualMessage = exception.getMessage();
+//        // Add any other assertions based on your needs
+//        assertEquals(expectedMessage, actualMessage);
+//
+//    }
 
   @Test
     public void testDeleteBookSuccessfully() throws IOException {
@@ -204,7 +233,7 @@ public class BookServiceTest {
 
 
     @Test
-    public void testUpdateBook(){
+    public void testUpdateBookSuccessfully(){
 
       String message = "Book with id 100 updated successfully";
       Book book = new Book(100L,"test book1");
